@@ -1,0 +1,38 @@
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# --- secrets / env ---
+*.env
+grafana.env
+**/*.secret
+**/secrets/
+**/certs/
+**/private/
+
+# --- runtime data (do not commit) ---
+prometheus/data/
+grafana/data/
+grafana/plugins/
+**/*-data/
+**/data/
+
+# --- backups / archives ---
+*.bak
+*.backup
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.prj
+*.pui
+
+# --- generated (keep source instead) ---
+# snmp.yml is generated, but we *do* keep it in this repo only if you want
+# fully reproducible imports without generator. If you prefer to ignore it,
+# uncomment next line.
+# prometheus/config/snmp.yml

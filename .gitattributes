@@ -1,2 +1,17 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Force consistent line endings in this repo (LF everywhere)
+* text=auto eol=lf
+
+# Explicitly treat common config formats as text
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.env   text eol=lf
+*.sh    text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.zip binary
