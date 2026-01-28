@@ -5,8 +5,8 @@ modules:
     http:
       preferred_ip_protocol: ip4
       valid_http_versions:
-      - HTTP/1.1
-      - HTTP/2.0
+        - HTTP/1.1
+        - HTTP/2.0
       follow_redirects: true
       fail_if_ssl: false
       fail_if_not_ssl: false
@@ -16,8 +16,8 @@ modules:
     http:
       preferred_ip_protocol: ip4
       valid_http_versions: &id001
-      - HTTP/1.1
-      - HTTP/2.0
+        - HTTP/1.1
+        - HTTP/2.0
       follow_redirects: true
       fail_if_ssl: false
       fail_if_not_ssl: false
@@ -31,6 +31,6 @@ modules:
       valid_http_versions: *id001
       follow_redirects: true
       valid_status_codes:
-      - 200
-      - 401
-      - 403
+        - 200
+        - 401
+        - 403
