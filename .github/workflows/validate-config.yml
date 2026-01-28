@@ -1,0 +1,43 @@
+name: Validate monitoring configs
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: YAML lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: |
+            compose.yml
+            prometheus/config
+          config_file: .yamllint.yml
+
+      - name: Prometheus config validation (promtool)
+        run: |
+          docker run --rm             -v "$PWD/prometheus/config:/etc/prometheus:ro"             prom/prometheus:latest             promtool check config /etc/prometheus/prometheus.yml
+
+      - name: Blackbox config parse
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yq
+          yq -e '.modules' prometheus/config/blackbox.yml >/dev/null
+
+      - name: SNMP config parse
+        run: |
+          yq -e '.modules' prometheus/config/snmp.yml >/dev/null
+
+      - name: Fail on CRLF line endings
+        run: |
+          if git grep -IUl $'\r' -- .; then
+            echo "CRLF detected in tracked files:"
+            git grep -IUl $'\r' -- .
+            exit 1
+          fi
