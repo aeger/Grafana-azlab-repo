@@ -1,5 +1,8 @@
 extends: default
 
+ignore: |
+  prometheus/config/snmp.yml
+
 rules:
   line-length:
     max: 140
